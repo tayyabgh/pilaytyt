@@ -1,0 +1,32 @@
+name: playit Rdp Tunnel
+
+on:
+workflow_dispatch:
+
+jobs:
+setup-rdp-tunnel:
+runs-on: windows-latest
+
+steps:
+- name: check out the repositorry
+uses: actions/checkout@v2
+
+- name: Download and Install playit
+run: |
+Invoke-Webrequest -uri "https://github.com/playit-cloud/playit-agent/releases/download/v0.15.26/playit-windows-x86_64-signed.exe OutFile
+start-sleep -seconds "5 Give some time for the download to complete
+
+- name: Enable Ts
+- run: Set-ItemProperty -Path "HKLM\System\CurrentControlSet\Control\Terminal server"-name "Deny TSConnections" -value 0
+- run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+- run: Set-ItemProperty -Path "HKLM\System\CurrentControlSet\Control\Terminal server\WinStations\RDP-Tcp" -name "UserAuthentication" -Value 1
+- run: Set-LocalUser -NAME "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "p@ssw0rd!" -Force)
+
+- name: Start Playit and Set Up RDP Tunnel
+  env:
+     PLAYIT AUTH KEY: ${{secrets.PL}}
+     run: |
+     Start-Process -FilePath "$env:USERPROFTLE\playit.exe" -Argumentlist "--secret $env:PLAYTT_AUTHKEY" -NoNewindow -Wait
+     Start-Process -Filepath "$env:USERPROFILE\playit.exe" -NoNewwindow
+     
+     
