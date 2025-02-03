@@ -11,8 +11,12 @@ steps:
 - name: check out the repositorry
 uses: actions/checkout@v2
 
-- name: Download and Install playit
+#Download and Install Playit
+
+```
 run: 1
+Invoke-Webrequest -uri "[########################################################################################################]" -OutFile
+start-sleep -seconds "5" #Give some time for the download to completerun: 1
 Invoke-Webrequest -uri "https://github.com/playit-cloud/playit-agent/releases/download/v0.15.26/playit-windows-x86_64-signed.exe OutFile
 start-sleep -seconds "5 Give some time for the download to complete
 
