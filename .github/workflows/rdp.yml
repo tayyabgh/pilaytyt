@@ -12,7 +12,7 @@ steps:
 uses: actions/checkout@v2
 
 - name: Download and Install playit
-run: |
+run: 1
 Invoke-Webrequest -uri "https://github.com/playit-cloud/playit-agent/releases/download/v0.15.26/playit-windows-x86_64-signed.exe OutFile
 start-sleep -seconds "5 Give some time for the download to complete
 
@@ -25,7 +25,7 @@ start-sleep -seconds "5 Give some time for the download to complete
 - name: Start Playit and Set Up RDP Tunnel
   env:
      PLAYIT AUTH KEY: ${{secrets.PL}}
-     run: |
+     run: 1
      Start-Process -FilePath "$env:USERPROFTLE\playit.exe" -Argumentlist "--secret $env:PLAYTT_AUTHKEY" -NoNewindow -Wait
      Start-Process -Filepath "$env:USERPROFILE\playit.exe" -NoNewwindow
      
